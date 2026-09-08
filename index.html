@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <link rel="icon" type="image/png" href="logo.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Wody Assets</title>
@@ -89,7 +90,13 @@ display:block;
 margin-right:15px;
 display:flex;
 align-items:center;
+gap:8px;
+color:var(--text);
+font-weight:900;
+font-size:18px;
+white-space:nowrap;
 }
+.logo-name{display:inline-block;}
 .nav-button{
 border:0;
 background:none;
@@ -102,7 +109,7 @@ white-space:nowrap;
 .nav-button:hover{background:var(--card);}
 .nav-button.active{background:var(--primary);color:white;}
 .spacer{flex:1;}
-.search-wrap{width:min(320px,30vw);min-width:170px;}
+.search-wrap{width:min(320px,30vw);min-width:170px;position:absolute;left:50%;transform:translateX(-50%);}
 .search-wrap input{
 width:100%;
 padding:9px 13px;
@@ -143,11 +150,18 @@ width:38px;height:38px;padding:0;border:1px solid var(--border);border-radius:50
 .view-settings-panel.show{display:grid;gap:8px;}
 .view-settings-panel button{padding:8px;border:1px solid var(--border);border-radius:7px;background:var(--card);color:var(--text);text-align:left;}
 .view-settings-panel button.active{border-color:var(--primary);background:var(--primary);color:white;}
+.filter-menu{position:relative;}
+.filter-panel{display:none;position:absolute;right:0;top:48px;width:300px;padding:14px;border:1px solid var(--border);border-radius:10px;background:var(--bg);box-shadow:var(--shadow);z-index:50;}
+.filter-panel.show{display:grid;gap:12px;}
+.filter-group{display:grid;gap:6px;}
+.filter-group label{font-size:12px;font-weight:800;color:var(--muted);}
+.filter-group select,.filter-group input{width:100%;padding:8px;border:1px solid var(--border);border-radius:7px;background:var(--card);color:var(--text);}
 .account-panel{max-width:380px;text-align:center;}
 .account-avatar{width:76px;height:76px;border-radius:50%;object-fit:cover;background:var(--card-hover);border:2px solid var(--border);}
 .account-name{font-size:20px;font-weight:900;margin:12px 0 4px;}
 .account-email{color:var(--muted);font-size:13px;word-break:break-word;}
-.google-button{width:100%;margin-top:18px;padding:11px;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--text);font-weight:900;}
+.google-button{width:100%;margin-top:18px;padding:11px;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--text);font-weight:900;display:flex;align-items:center;justify-content:center;gap:9px;}
+.google-button img{width:20px;height:20px;object-fit:contain;flex:none;}
 .google-button:hover{border-color:var(--primary);color:var(--primary);}
 .cloud-community{margin-top:25px;border-top:1px solid var(--border);padding-top:22px;}
 .rating-summary{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:13px;}
@@ -156,12 +170,15 @@ width:38px;height:38px;padding:0;border:1px solid var(--border);border-radius:50
 .rating-picker button{border:0;background:transparent;color:#b8b1bd;border-radius:6px;padding:2px 4px;font-size:26px;line-height:1;}
 .rating-picker button:hover,.rating-picker button.active{color:#e3a400;transform:scale(1.08);}
 .rating-picker button.active{background:transparent;color:#e3a400;border-color:transparent;}
-.cloud-comment{display:flex;gap:10px;padding:12px 0;border-bottom:1px solid var(--border);}
+.cloud-comment{display:flex;gap:10px;padding:12px 0;border-bottom:1px solid var(--border);position:relative;padding-right:48px;}
 .cloud-comment img{width:34px;height:34px;border-radius:50%;object-fit:cover;background:var(--card-hover);flex:none;}
 .cloud-comment-body{min-width:0;flex:1;}
 .cloud-comment-head{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
 .cloud-comment-head strong{font-size:13px;}
 .cloud-comment-text{margin-top:6px;white-space:pre-wrap;}
+.cloud-comment-rating{color:#e3a400;letter-spacing:1px;font-size:15px;margin-top:4px;}
+.comment-like-button{position:absolute;right:0;top:10px;border:0;background:transparent;color:var(--muted);padding:0;font-size:12px;font-weight:800;}
+.comment-like-button:hover,.comment-like-button.active{color:var(--danger);}
 .report-icon{width:36px;height:36px;padding:0;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--danger);font-size:18px;}
 .reports-list{display:grid;gap:10px;max-height:420px;overflow:auto;}
 .report-item{padding:12px;border:1px solid var(--border);border-radius:9px;background:var(--bg);text-align:left;}
@@ -194,7 +211,7 @@ gap:20px;
 .grid.view-list{grid-template-columns:1fr;gap:12px;}
 .grid.view-list .card{display:grid;grid-template-columns:180px 1fr;}
 .grid.view-list .card-image{height:100%;aspect-ratio:auto;}
-@media(max-width:600px){.grid.view-list .card{grid-template-columns:120px 1fr;}.view-settings-panel{right:-60px;}}
+@media(max-width:600px){.grid.view-list .card{grid-template-columns:120px 1fr;}.view-settings-panel{right:-60px;}.filter-panel{position:fixed;top:62px;left:10px;right:10px;width:auto;}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}.grid.view-large,.grid.view-list{grid-template-columns:repeat(2,minmax(0,1fr));}.grid.view-list .card{display:block;}.grid.view-list .card-image{height:auto;aspect-ratio:630/500;}}
 
 .card{
 background:var(--card);
@@ -1015,6 +1032,21 @@ object-fit:contain;
 .gallery-thumb.active{border-color:var(--primary);}
 .gallery-thumb img{width:100%;height:100%;object-fit:cover;}
 .back-to-pack{margin-bottom:12px;}
+@media(max-width:760px){
+.navbar{padding:8px 10px;gap:5px;overflow-x:auto;flex-wrap:wrap;}
+.logo img{width:38px;height:38px;}.logo{font-size:15px;margin-right:5px;}.logo-name{max-width:105px;overflow:hidden;text-overflow:ellipsis;}
+.spacer{display:none;}
+.search-wrap{order:10;width:100%;min-width:0;position:static;transform:none;}
+.navbar select.nav-button{max-width:110px;padding:7px 5px;}
+.admin-layout,.detail-grid{grid-template-columns:1fr;}
+.modal{padding:8px;align-items:flex-start;}
+.modal-box{max-height:96vh;padding:18px 14px;border-radius:12px;}
+.admin-modal,.product-modal{width:100%;}
+.sale-row{grid-template-columns:1fr 1fr;}
+.sale-row strong{grid-column:1/-1;}
+.detail-title{font-size:26px;}
+.gallery-stage{min-height:230px;}
+}
 
 footer{
 border-top:1px solid var(--border);
@@ -1043,13 +1075,22 @@ to{opacity:1;transform:scale(1) translateY(0);}
 <div class="geo-bg" aria-hidden="true"><span class="geo-triangle"></span><span class="geo-circle"></span><span class="geo-cylinder"></span><span class="geo-trapezoid"></span><span class="geo-half"></span></div>
 
 <nav class="navbar">
-<div class="logo"><img src="https://cdn.phototourl.com/free/2026-09-08-e2c7a97b-25cf-4672-b57f-f74df59f6206.png" alt="Wody Assets"></div>
+<div class="logo"><img src="https://cdn.phototourl.com/free/2026-09-08-2dc381f1-ee2a-4033-8a87-7d07af112410.webp" alt="Woody Assets"><span class="logo-name">Woody Assets</span></div>
 
 <button id="allNav" class="nav-button active" onclick="setMainFilter('all')">All</button>
 <button id="packsNav" class="nav-button" onclick="setMainFilter('packs')">Packs</button>
 <button id="modelsNav" class="nav-button" onclick="setMainFilter('models')">Models</button>
 <!-- تم تغيير اسم وزر الفافوريت ليشمل النجمة -->
 <button id="favoritesNav" class="nav-button" onclick="setMainFilter('favorites')">Favorites ★</button>
+
+<div class="filter-menu">
+<button id="filterButton" class="nav-button" onclick="toggleFilterMenu()">Filter</button>
+<div id="filterPanel" class="filter-panel">
+<div class="filter-group"><label for="sortFilter">Sort</label><select id="sortFilter" onchange="setSortMode(this.value)"><option value="default">Default</option><option value="alpha-asc">A-Z</option><option value="alpha-desc">Z-A</option><option value="rating-desc">Top Rated</option><option value="rating-asc">Lowest Rated</option><option value="likes-desc">Most Liked</option><option value="likes-asc">Least Liked</option></select></div>
+<div class="filter-group"><label for="discountFilter">Discount</label><select id="discountFilter" onchange="setDiscountFilter(this.value)"><option value="0">Discount</option><option value="10">10%</option><option value="20">20%</option><option value="30">30%</option><option value="40">40%</option><option value="50">50%</option><option value="100">Free</option></select></div>
+<div class="filter-group"><label for="maxPriceFilter">Price</label><select id="maxPriceFilter" onchange="setPriceFilter(this.value)"><option value="Infinity">All prices</option><option value="10">Under $10</option><option value="25">Under $25</option><option value="50">Under $50</option><option value="100">Under $100</option><option value="custom">Custom</option></select><input id="customPriceFilter" type="number" min="0" step="0.01" placeholder="Maximum price" oninput="setCustomPriceFilter(this.value)" hidden></div>
+</div>
+</div>
 
 <div class="spacer"></div>
 
@@ -1058,7 +1099,6 @@ to{opacity:1;transform:scale(1) translateY(0);}
 </div>
 
 <button id="adminButton" class="nav-button" onclick="openAdmin()" style="display:none">Admin</button>
-<button id="plusButton" class="nav-button" onclick="openAdmin()" style="display:none">＋</button>
 <button id="accountButton" class="account-button" onclick="openAccountPanel()" title="Account">◯</button>
 
 <button id="themeButton" class="theme-button" onclick="toggleTheme()" title="Toggle theme">☀</button>
@@ -1105,7 +1145,7 @@ to{opacity:1;transform:scale(1) translateY(0);}
 <button class="close" onclick="closeModal('loginModal')">×</button>
 <h2>Admin Access</h2>
 <p class="info">Sign in with the authorized Google account to continue.</p>
-<button class="google-button" onclick="signInWithGoogleAccount()">Continue with Google</button>
+<button class="google-button" onclick="signInWithGoogleAccount()"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/250px-Google_Favicon_2025.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail" alt="">Continue with Google</button>
 </div>
 
 </div>
@@ -1117,7 +1157,7 @@ to{opacity:1;transform:scale(1) translateY(0);}
 <img id="accountAvatar" class="account-avatar" alt="Account">
 <div id="accountName" class="account-name">Guest</div>
 <div id="accountEmail" class="account-email"></div>
-<button id="googleLoginButton" class="google-button" onclick="signInWithGoogleAccount()">Continue with Google</button>
+<button id="googleLoginButton" class="google-button" onclick="signInWithGoogleAccount()"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Google_Favicon_2025.svg/250px-Google_Favicon_2025.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail" alt="">Continue with Google</button>
 <button id="accountLogoutButton" class="danger-button" onclick="signOutAccount()" style="display:none;width:100%;margin-top:18px">Logout</button>
 </div>
 </div>
@@ -1176,7 +1216,7 @@ to{opacity:1;transform:scale(1) translateY(0);}
 <input id="packName" class="required" type="text">
 
 <label for="packImage">Pack Cover *</label>
-<input id="packImage" class="required" type="file" accept="image/*" onchange="previewPackImage(this)">
+<input id="packImage" class="required" type="file" accept="image/webp,.webp" onchange="updatePackImage(this)">
 
 <img id="packImagePreview" class="image-preview">
 
@@ -1222,14 +1262,6 @@ to{opacity:1;transform:scale(1) translateY(0);}
 
 <div id="adminDebug"></div>
 
-<div class="admin-column" style="margin-top:20px;grid-column:1/-1">
-<div class="admin-column-title">
-<h3>Reports <span id="newReportsBadge" class="section-count">0</span></h3>
-<button class="secondary-button" onclick="loadCloudReports()">Refresh Reports</button>
-</div>
-<div id="cloudReports" class="reports-list"><div class="info">Reports are available to authorized admins.</div></div>
-</div>
-
 </div>
 
 </div>
@@ -1271,6 +1303,7 @@ to{opacity:1;transform:scale(1) translateY(0);}
 
 <div class="image-viewer-header" style="display:flex;justify-content:space-between;margin-bottom:10px;">
 <div id="imageViewerTitle" style="font-weight:900;">Image</div>
+<div class="image-tools"><button class="secondary-button" onclick="zoomImage(-.15)">−</button><button class="secondary-button" onclick="zoomImage(.15)">＋</button><button class="secondary-button" onclick="resetImageZoom()">Reset</button></div>
 <button class="close" onclick="closeModal('imageViewerModal')" style="position:static;">×</button>
 </div>
 
@@ -1283,18 +1316,13 @@ to{opacity:1;transform:scale(1) translateY(0);}
 
 
 <script>
-const ADMIN_CODE="1234";
-const MY_EMAIL="your_email@example.com"; // ضع إيميلك هنا لتستقبل عليه التبليغات العاجلة
-
 const THEME_KEY="wody_assets_theme";
-const DB_NAME="WodyAssetsDB";
-const DB_VERSION=1;
-const DB_STORE="app";
+const LEGACY_CLEANUP_KEY="wody_cleanup_v1";
 
 let packs=[];
 let models=[];
 let customCategories=[];
-let currentPackCoverBlob=null; // احتفاظ مؤقت بملف صورة الـ Pack للتأكد من حل مشكلة الاستيراد
+let currentPackCoverUrl="";
 
 let favorites={packs:[],models:[]};
 let likedItems={packs:[],models:[]};
@@ -1302,18 +1330,25 @@ let likeCounts={packs:{},models:{}};
 let comments={packs:{},models:{}};
 let views={packs:{},models:{}};
 
-let adminLoggedIn=sessionStorage.getItem("wody_admin")==="true";
+let adminLoggedIn=false;
 let currentMainFilter="all";
 let currentSearch="";
 
+function cleanupLegacyLocalData(){
+if(localStorage.getItem(LEGACY_CLEANUP_KEY)==="done")return;
+try{indexedDB.deleteDatabase("WodyAssetsDB");}catch(error){console.warn("Legacy IndexedDB cleanup failed:",error);}
+for(const key of Object.keys(localStorage)){if(key.startsWith("wody_")&&!key.includes("theme")&&!key.includes("view_mode")&&!key.includes("sort_mode")&&!key.includes("discount_filter")&&!key.includes("max_price"))localStorage.removeItem(key);}
+for(const key of Object.keys(sessionStorage)){if(key.startsWith("wody_"))sessionStorage.removeItem(key);}
+localStorage.setItem(LEGACY_CLEANUP_KEY,"done");
+}
+
 let editingPackId="";
 let adminModelDrafts=[];
+let currentPackExtraFields={};
 let activeReportTarget="";
 let detailBackPackId="";
 let galleryImages=[];
 let galleryIndex=0;
-
-const imageURLCache=new Map();
 
 function createId(){
 if(window.crypto&&crypto.randomUUID)return crypto.randomUUID();
@@ -1364,98 +1399,50 @@ element.className="save-status "+type;
 
 
 /* =========================
-   INDEXED DB
-========================= */
-
-function openDB(){
-return new Promise((resolve,reject)=>{
-const request=indexedDB.open(DB_NAME,DB_VERSION);
-request.onupgradeneeded=()=>{
-const db=request.result;
-if(!db.objectStoreNames.contains(DB_STORE)){
-db.createObjectStore(DB_STORE);
-}
-};
-request.onsuccess=()=>resolve(request.result);
-request.onerror=()=>reject(request.error);
-});
-}
-
-async function idbPut(data){
-const db=await openDB();
-return new Promise((resolve,reject)=>{
-const transaction=db.transaction(DB_STORE,"readwrite");
-transaction.objectStore(DB_STORE).put(data,"data");
-transaction.oncomplete=()=>{db.close();resolve();};
-transaction.onerror=()=>{db.close();reject(transaction.error);};
-});
-}
-
-async function idbGet(){
-const db=await openDB();
-return new Promise((resolve,reject)=>{
-const transaction=db.transaction(DB_STORE,"readonly");
-const request=transaction.objectStore(DB_STORE).get("data");
-request.onsuccess=()=>resolve(request.result||null);
-request.onerror=()=>reject(request.error);
-transaction.oncomplete=()=>db.close();
-});
-}
-
-
-/* =========================
    IMAGE CONVERSION
 ========================= */
 
 function getImageSrc(image){
-if(!image)return "";
-if(typeof image==="string")return image;
-if(image instanceof Blob){
-let url=imageURLCache.get(image);
-if(!url){
-url=URL.createObjectURL(image);
-imageURLCache.set(image,url);
-}
-return url;
-}
-return "";
+return typeof image==="string"?image:"";
 }
 
-function blobToDataURL(blob){
+function fileToDataURL(file){
 return new Promise((resolve,reject)=>{
-if(!blob){resolve(null);return;}
+const fileName=String(file?.name||"").toLowerCase();
+const mimeType=String(file?.type||"").toLowerCase();
+if(!file||mimeType!=="image/webp"||!fileName.endsWith(".webp")){
+reject(new Error("Only WebP images (.webp) are supported."));
+return;
+}
 const reader=new FileReader();
-reader.onload=()=>resolve(reader.result);
-reader.onerror=()=>reject(reader.error);
-reader.readAsDataURL(blob);
+reader.onload=()=>{
+const dataURL=String(reader.result||"");
+if(!/^data:image\/webp;base64,/i.test(dataURL)){reject(new Error("The selected file is not a valid WebP image."));return;}
+resolve(dataURL);
+};
+reader.onerror=()=>reject(reader.error||new Error("The image could not be read."));
+reader.readAsDataURL(file);
 });
 }
 
-function dataURLToBlob(dataURL){
-if(!dataURL)return null;
-if(dataURL instanceof Blob)return dataURL;
-if(typeof dataURL!=="string"||!dataURL.startsWith("data:"))return null;
-const parts=dataURL.split(",");
-if(parts.length<2)return null;
-const mimeMatch=parts[0].match(/data:(.*?);base64/i);
-const mime=mimeMatch?mimeMatch[1]:"application/octet-stream";
-try{
-const binary=atob(parts[1]);
-const bytes=new Uint8Array(binary.length);
-for(let i=0;i<binary.length;i++){
-bytes[i]=binary.charCodeAt(i);
+function isWebPDataURL(value){
+return typeof value==="string"&&/^data:image\/webp;base64,[A-Za-z0-9+/]+=*$/i.test(value);
 }
-return new Blob([bytes],{type:mime});
-}catch(e){
-return null;
+
+const FIRESTORE_DOCUMENT_LIMIT_BYTES=1048576;
+const FIRESTORE_DOCUMENT_WARNING_BYTES=900000;
+function getDocumentSizeBytes(data){
+return new TextEncoder().encode(JSON.stringify(data)).byteLength;
+}
+function assertAssetDocumentSize(collectionName,id,data){
+const size=getDocumentSizeBytes(data);
+if(size>=FIRESTORE_DOCUMENT_WARNING_BYTES){
+throw new Error(`${collectionName}/${id} is too large (${size} bytes). Choose a smaller WebP image. Firestore documents must stay below ${FIRESTORE_DOCUMENT_LIMIT_BYTES} bytes.`);
 }
 }
 
 function normalizeStoredImage(image){
-if(!image)return null;
-if(image instanceof Blob)return image;
-if(typeof image==="string")return dataURLToBlob(image);
-return null;
+return isWebPDataURL(image)?image:null;
 }
 
 
@@ -1465,6 +1452,7 @@ return null;
 
 function migrateData(){
 packs=(Array.isArray(packs)?packs:[]).map(pack=>({
+...pack,
 id:pack.id||createId(),
 name:String(pack.name||""),
 image:normalizeStoredImage(pack.image),
@@ -1486,6 +1474,7 @@ pack.saleEndsAt="";
 });
 
 models=(Array.isArray(models)?models:[]).map(model=>({
+...model,
 id:model.id||createId(),
 name:String(model.name||""),
 packId:String(model.packId||""),
@@ -1512,47 +1501,18 @@ if(!views||typeof views!=="object")views={packs:{},models:{}};
 }
 
 async function loadData(){
-try{
-const indexedData=await idbGet();
-if(indexedData){
-packs=indexedData.packs||[];
-models=indexedData.models||[];
-customCategories=indexedData.categories||[];
-favorites=indexedData.favorites||{packs:[],models:[]};
-likedItems=indexedData.likedItems||{packs:[],models:[]};
-likeCounts=indexedData.likeCounts||{packs:{},models:{}};
-views=indexedData.views||{packs:{},models:{}};
-comments=indexedData.comments||{packs:{},models:{}};
-migrateData();
-}
-}catch(e){
-console.error("DB load error:",e);
-}
+packs=[];
+models=[];
+customCategories=[];
+favorites={packs:[],models:[]};
+likedItems={packs:[],models:[]};
+likeCounts={packs:{},models:{}};
+views={packs:{},models:{}};
+comments={packs:{},models:{}};
 }
 
 async function saveData(){
-setSaveStatus("Saving...","");
-try{
-const cleanData={
-version:7,
-updatedAt:new Date().toISOString(),
-categories:customCategories,
-packs,
-models,
-favorites,
-likedItems,
-likeCounts,
-views,
-comments
-};
-await idbPut(cleanData);
-setSaveStatus("Saved ✓","success");
 return true;
-}catch(error){
-setSaveStatus("Save failed","error");
-alert("Could not save data: "+error.message);
-return false;
-}
 }
 
 
@@ -1606,7 +1566,7 @@ const original=Number(item?.originalPrice)||0;
 const discount=getDiscountPercent(item);
 const activeEvent=item?.saleEvent&&item?.saleEndsAt&&new Date(item.saleEndsAt).getTime()>Date.now();
 const saleClass=activeEvent?eventClass(item.saleEvent):"";
-return `<div class="price-row"><span class="price sale-price ${saleClass}">$${formatPrice(sale)}</span>${discount?`<span class="old-price">$${formatPrice(original)}</span><span class="discount ${saleClass}">${discount}% OFF</span>`:""}</div>`;
+return `<div class="price-row"><span class="price sale-price ${saleClass}">${sale===0?"Free":"$"+formatPrice(sale)}</span>${discount?`<span class="old-price">$${formatPrice(original)}</span><span class="discount ${saleClass}">${discount}% OFF</span>`:""}</div>`;
 }
 
 function renderEventBadge(pack){
@@ -1653,39 +1613,18 @@ updateThemeIcon();
    ADMIN LOGIC & EDITING
 ========================= */
 
-function openLogin(){
-document.getElementById("loginModal").classList.add("show");
-document.getElementById("adminCode").value="";
-document.getElementById("adminCode").focus();
-}
-
-function login(){
-if(document.getElementById("adminCode").value===ADMIN_CODE){
-adminLoggedIn=true;
-sessionStorage.setItem("wody_admin","true");
-closeModal("loginModal");
-updateAdminUI();
-openAdmin();
-renderAll();
-}else{
-alert("Wrong admin code.");
-}
-}
-
 function logout(){
 adminLoggedIn=false;
-sessionStorage.removeItem("wody_admin");
 closeModal("adminModal");
 updateAdminUI();
 renderAll();
+window.signOutAccount?.();
 }
 
 function updateAdminUI(){
 const adminButton=document.getElementById("adminButton");
-const plusButton=document.getElementById("plusButton");
 const verifiedAdmin=window.firebaseAdminReady===true&&window.firebaseAdmin===true;
 if(adminButton)adminButton.style.display=verifiedAdmin?"block":"none";
-if(plusButton)plusButton.style.display=verifiedAdmin?"block":"none";
 }
 
 function openAdmin(){
@@ -1697,7 +1636,8 @@ document.getElementById("adminModal").classList.add("show");
 
 function startNewPack(){
 editingPackId=createId();
-currentPackCoverBlob=null;
+currentPackCoverUrl="";
+currentPackExtraFields={};
 resetPackForm();
 adminModelDrafts=[];
 renderModelEditors();
@@ -1729,9 +1669,12 @@ const pack=packs.find(p=>p.id===packId);
 if(!pack)return;
 
 editingPackId=packId;
-currentPackCoverBlob=pack.image;
+currentPackCoverUrl=pack.image||"";
+currentPackExtraFields={...pack};
+delete currentPackExtraFields.image;
 
 document.getElementById("packName").value=pack.name||"";
+document.getElementById("packImage").value="";
 document.getElementById("packOriginalPrice").value=pack.originalPrice??"";
 document.getElementById("packSalePrice").value=pack.salePrice??"";
 document.getElementById("packUrl").value=pack.url||"";
@@ -1814,7 +1757,7 @@ selectedSalePacks.forEach(id=>{
 const pack=packs.find(item=>item.id===id);const input=document.getElementById(`sale-${id}`);
 if(pack&&input){pack.salePrice=Number(input.value)||0;pack.saleEvent=event;pack.saleEndsAt=endsAt;}
 });
-await saveData();
+await window.saveCloudAssets?.();
 renderAdminCatalog();
 alert("Sale applied to selected packs.");
 }
@@ -1826,7 +1769,7 @@ selectedSalePacks.forEach(id=>{
 const pack=packs.find(item=>item.id===id);
 if(pack){pack.salePrice=pack.originalPrice;pack.saleEvent="";pack.saleEndsAt="";}
 });
-await saveData();
+await window.saveCloudAssets?.();
 renderAdminCatalog();
 }
 
@@ -1834,10 +1777,12 @@ async function deletePack(id){
 if(!adminLoggedIn|| (window.firebaseAdminReady&&!window.firebaseAdmin)){alert("Access Denied");return;}
 const pack=packs.find(item=>item.id===id);if(!pack)return;
 if(!confirm(`Delete "${pack.name}" and all its models permanently?`))return;
+const removedModelIds=models.filter(model=>model.packId===id).map(model=>model.id);
 packs=packs.filter(item=>item.id!==id);
 models=models.filter(model=>model.packId!==id);
 selectedSalePacks=selectedSalePacks.filter(item=>item!==id);
 if(editingPackId===id)startNewPack();
+if(window.deleteCloudAsset){await window.deleteCloudAsset(id,"packs");for(const modelId of removedModelIds)await window.deleteCloudAsset(modelId,"models");}
 await saveData();
 renderAdminCatalog();
 }
@@ -1860,10 +1805,8 @@ const url=document.getElementById("packUrl").value.trim();
 const description=document.getElementById("packDescription").value.trim();
 const saleEvent=document.getElementById("packSaleEvent").value.trim();
 const saleEndsAt=document.getElementById("packSaleEndsAt").value;
-const imageFile=document.getElementById("packImage").files[0];
-
 const oldPack=packs.find(p=>p.id===editingPackId);
-let image=imageFile || currentPackCoverBlob || oldPack?.image || null;
+let image=currentPackCoverUrl || oldPack?.image || null;
 
 if(!name){alert("Pack Name is required.");return;}
 if(!image){alert("Pack Image is required.");return;}
@@ -1883,7 +1826,9 @@ return;
 
 models=models.filter(m=>m.packId!==editingPackId);
 adminModelDrafts.forEach(m=>{
+const {collapsed,material,edges,solid,...modelExtraFields}=m;
 models.push({
+...modelExtraFields,
 id:m.id||createId(),
 name:m.name.trim(),
 packId:editingPackId,
@@ -1904,6 +1849,7 @@ categories:uniqueCategories(["Model",...(m.categories||[])])
 });
 
 const packData={
+...currentPackExtraFields,
 id:editingPackId,
 name,
 image,
@@ -1921,11 +1867,19 @@ const existingIndex=packs.findIndex(p=>p.id===editingPackId);
 if(existingIndex>=0)packs[existingIndex]=packData;
 else packs.push(packData);
 
-const success=await saveData();
+setSaveStatus("Saving...","");
+const success=await window.saveCloudAssets?.();
 if(success){
-alert("Pack and Models saved successfully.");
+setSaveStatus("Saved ✓","success");
+alert("Pack and Models saved successfully");
 closeModal("adminModal");
+}else{
+setSaveStatus("Save failed","error");
 }
+}catch(error){
+console.error("Pack save failed:",error);
+setSaveStatus("Save failed","error");
+alert(`Save failed: ${error.message}`);
 }finally{
 if(saveButton)saveButton.disabled=false;
 }
@@ -1980,18 +1934,30 @@ adminModelDrafts[index][field]=!!checked;
 
 function updateDraftImage(index,field,input){
 const file=input.files?.[0];
-if(file)adminModelDrafts[index][field]=file;
+if(!file)return;
+fileToDataURL(file).then(dataURL=>{
+adminModelDrafts[index][field]=dataURL;
 renderModelEditors();
+}).catch(error=>{
+console.error("Model image conversion failed:",error);
+alert(error.message);
+input.value="";
+});
 }
 
-function previewPackImage(input){
+function updatePackImage(input){
 const file=input.files?.[0];
-if(file){
-currentPackCoverBlob=file;
+if(!file)return;
+fileToDataURL(file).then(dataURL=>{
+currentPackCoverUrl=dataURL;
 const preview=document.getElementById("packImagePreview");
-preview.src=getImageSrc(file);
+preview.src=dataURL;
 preview.style.display="block";
-}
+}).catch(error=>{
+console.error("Pack image conversion failed:",error);
+alert(error.message);
+input.value="";
+});
 }
 
 function renderModelEditors(){
@@ -2018,12 +1984,16 @@ container.innerHTML=adminModelDrafts.map((model,index)=>`
 <input type="text" value="${escapeHTML(model.name||"")}" oninput="updateDraftField(${index},'name',this.value)">
 
 <label>Material Image *</label>
-<input type="file" accept="image/*" onchange="updateDraftImage(${index},'material',this)">
+<input type="file" accept="image/webp,.webp" onchange="updateDraftImage(${index},'material',this)">
 ${model.material?`<img class="image-preview" style="display:block" src="${getImageSrc(model.material)}">`:""}
 
 <label>Edges Image *</label>
-<input type="file" accept="image/*" onchange="updateDraftImage(${index},'edges',this)">
+<input type="file" accept="image/webp,.webp" onchange="updateDraftImage(${index},'edges',this)">
 ${model.edges?`<img class="image-preview" style="display:block" src="${getImageSrc(model.edges)}">`:""}
+
+<label>Solid Image</label>
+<input type="file" accept="image/webp,.webp" onchange="updateDraftImage(${index},'solid',this)">
+${model.solid?`<img class="image-preview" style="display:block" src="${getImageSrc(model.solid)}">`:""}
 
 <label>Original Price *</label>
 <input type="number" step="0.01" value="${escapeHTML(model.originalPrice??"")}" oninput="updateDraftField(${index},'originalPrice',this.value)">
@@ -2058,38 +2028,6 @@ function renderPackDerivedCategories(){
 const box=document.getElementById("packDerivedCategories");
 if(!box)return;
 box.innerHTML=getDraftPackCategories().map(c=>`<span class="category-chip selected">${escapeHTML(c)}</span>`).join("");
-}
-
-
-/* =========================
-   REPORT SYSTEM
-========================= */
-
-function openReportModal(itemName){
-activeReportTarget=itemName;
-document.getElementById("reportText").value="";
-document.getElementById("reportEmail").value="";
-document.getElementById("reportModal").classList.add("show");
-}
-
-function sendReport(){
-const text=document.getElementById("reportText").value.trim();
-const email=document.getElementById("reportEmail").value.trim();
-if(!text){
-alert("Please write details about the issue.");
-return;
-}
-if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-alert("Please enter a valid email address.");
-return;
-}
-
-const subject=encodeURIComponent(`URGENT REPORT: Wody Assets Issue - ${activeReportTarget}`);
-const body=encodeURIComponent(`Urgent Problem Report for: ${activeReportTarget}\n\nUser email: ${email}\n\nDetails:\n${text}\n\nSent at: ${new Date().toLocaleString()}`);
-
-window.location.href=`mailto:${MY_EMAIL}?subject=${subject}&body=${body}`;
-closeModal("reportModal");
-alert("Your report has been prepared! Click send in your email application.");
 }
 
 
@@ -2143,6 +2081,7 @@ if(!grid)return;
 let visible=packs.filter(p=>!currentSearch||p.name.toLowerCase().includes(currentSearch.toLowerCase()));
 if(currentMainFilter==="favorites")visible=visible.filter(p=>favorites.packs.includes(p.id));
 if(currentMainFilter==="models")visible=[];
+visible=applyStorefrontFilters(visible);
 
 document.getElementById("packsCount").textContent=visible.length;
 
@@ -2182,6 +2121,7 @@ if(!grid)return;
 let visible=models.filter(m=>!currentSearch||m.name.toLowerCase().includes(currentSearch.toLowerCase()));
 if(currentMainFilter==="favorites")visible=visible.filter(m=>favorites.models.includes(m.id));
 if(currentMainFilter==="packs")visible=[];
+visible=applyStorefrontFilters(visible);
 
 document.getElementById("modelsCount").textContent=visible.length;
 
@@ -2210,6 +2150,33 @@ ${renderPriceRow(model)}
 </div>
 </article>
 `).join("");
+}
+
+function getStorefrontFilterState(){
+return {sort:localStorage.getItem("wody_sort_mode")||"default",discount:Number(localStorage.getItem("wody_discount_filter")||0),maxPrice:Number(localStorage.getItem("wody_max_price")||Infinity)};
+}
+function applyStorefrontFilters(items){
+const state=getStorefrontFilterState();
+let result=items.filter(item=>{
+const discount=getDiscountPercent(item);const price=Number(item.salePrice)||0;
+const discountMatches=state.discount===100?price===0:discount>=state.discount;
+return discountMatches&&price<=state.maxPrice;
+});
+const ratings=window.cloudRatingsPublic||{};
+const likes=window.likeCountsPublic||likeCounts;
+result.sort((a,b)=>{
+if(state.sort==="alpha-asc")return a.name.localeCompare(b.name);
+if(state.sort==="alpha-desc")return b.name.localeCompare(a.name);
+const type=a.packId?"models":"packs";
+const aRating=ratings[`${type}_${a.id}`]?.average||0;const bRating=ratings[`${type}_${b.id}`]?.average||0;
+const aLikes=likes[type]?.[a.id]||0;const bLikes=likes[type]?.[b.id]||0;
+if(state.sort==="rating-desc")return bRating-aRating;
+if(state.sort==="rating-asc")return aRating-bRating;
+if(state.sort==="likes-desc")return bLikes-aLikes;
+if(state.sort==="likes-asc")return aLikes-bLikes;
+return 0;
+});
+return result;
 }
 
 
@@ -2305,8 +2272,8 @@ function renderDetailActions(type,id){
 const liked=likedItems[type]?.includes(id);
 const favorite=favorites[type]?.includes(id);
 return `<div class="detail-actions">
-<button class="action-icon ${liked?"liked":""}" onclick="toggleLike(event,'${type}','${id}');return false;">♥ ${likeCounts[type]?.[id]||0} Likes</button>
-<button class="action-icon ${favorite?"active":""}" onclick="toggleFavorite(event,'${type}','${id}');return false;">★ ${favorite?"Favorited":"Favorite"}</button>
+<button class="action-icon ${liked?"liked":""}" data-like="${type}:${id}" onclick="toggleLike(event,'${type}','${id}');return false;">♥ ${likeCounts[type]?.[id]||0} Likes</button>
+<button class="action-icon ${favorite?"active":""}" data-favorite="${type}:${id}" onclick="toggleFavorite(event,'${type}','${id}');return false;">★ ${favorite?"Favorited":"Favorite"}</button>
 <button class="report-icon" title="Report" onclick="openCloudReport('${type}','${id}');return false;">⚠</button>
 </div>`;
 }
@@ -2395,27 +2362,12 @@ ${renderComments("models",id)}
 
 async function toggleFavorite(event,type,id){
 event.stopPropagation();
-const idx=favorites[type].indexOf(id);
-if(idx>=0)favorites[type].splice(idx,1);
-else favorites[type].push(id);
-await saveData();
-updateLocalEngagementUI(type,id);
-if(document.getElementById("productModal")?.classList.contains("show"))renderCurrentDetail();
+if(window.firebaseToggleFavorite){await window.firebaseToggleFavorite(event,type,id);}
 }
 
 async function toggleLike(event,type,id){
 event.stopPropagation();
-const idx=likedItems[type].indexOf(id);
-if(idx>=0){
-likedItems[type].splice(idx,1);
-likeCounts[type][id]=Math.max(0,(likeCounts[type][id]||1)-1);
-}else{
-likedItems[type].push(id);
-likeCounts[type][id]=(likeCounts[type][id]||0)+1;
-}
-await saveData();
-updateLocalEngagementUI(type,id);
-if(document.getElementById("productModal")?.classList.contains("show"))renderCurrentDetail();
+if(window.firebaseToggleLike){await window.firebaseToggleLike(event,type,id);}
 }
 
 function updateLocalEngagementUI(type,id){
@@ -2436,16 +2388,24 @@ const pack=packs.find(p=>p.id===editingPackId);
 if(!pack){alert("Please open or save a Pack first.");return;}
 const packModels=models.filter(m=>m.packId===pack.id);
 
+const exportedPack={...pack,imageData:pack.image||""};
+delete exportedPack.image;
+delete exportedPack.imageUrl;
+const exportedModels=packModels.map(model=>{
+const exportedModel={...model,materialData:model.material||"",edgesData:model.edges||"",solidData:model.solid||""};
+delete exportedModel.material;
+delete exportedModel.edges;
+delete exportedModel.solid;
+delete exportedModel.materialUrl;
+delete exportedModel.edgesUrl;
+delete exportedModel.solidUrl;
+return exportedModel;
+});
 const exportedData={
 format:"wodypack",
-version:1,
-pack:{...pack,image:pack.image?{data:await blobToDataURL(pack.image)}:null},
-models:await Promise.all(packModels.map(async m=>({
-...m,
-material:m.material?{data:await blobToDataURL(m.material)}:null,
-edges:m.edges?{data:await blobToDataURL(m.edges)}:null,
-solid:m.solid?{data:await blobToDataURL(m.solid)}:null
-})))
+version:2,
+pack:exportedPack,
+models:exportedModels
 };
 
 const blob=new Blob([JSON.stringify(exportedData,null,2)],{type:"application/json"});
@@ -2468,13 +2428,16 @@ const text=await file.text();
 const data=JSON.parse(text);
 if(data.format!=="wodypack"||!data.pack)throw new Error("Invalid WodyPack file.");
 
-const newPackId=createId();
-const packImage=data.pack.image?dataURLToBlob(data.pack.image.data):null;
+const newPackId=data.pack.id||createId();
+const packImage=typeof data.pack.imageData==="string"?data.pack.imageData:(typeof data.pack.image==="string"?data.pack.image:"");
 
-if(!packImage)throw new Error("Pack cover image is required.");
+if(!isWebPDataURL(packImage))throw new Error("Imported Pack Cover must be a WebP Data URL.");
 
 editingPackId=newPackId;
-currentPackCoverBlob=packImage; // حفظ الصورة في الـ Blob لضمان الحفظ مباشرة
+currentPackCoverUrl=packImage;
+currentPackExtraFields={...data.pack};
+delete currentPackExtraFields.image;
+delete currentPackExtraFields.imageData;
 
 document.getElementById("packName").value=data.pack.name||"";
 document.getElementById("packOriginalPrice").value=data.pack.originalPrice??"";
@@ -2483,18 +2446,22 @@ document.getElementById("packUrl").value=data.pack.url||"";
 document.getElementById("packDescription").value=data.pack.description||"";
 
 const preview=document.getElementById("packImagePreview");
-preview.src=getImageSrc(packImage);
+preview.src=packImage;
 preview.style.display="block";
 
 adminModelDrafts=(data.models||[]).map(m=>({
 ...m,
-id:createId(),
+id:m.id||createId(),
 packId:newPackId,
-material:m.material?dataURLToBlob(m.material.data):null,
-edges:m.edges?dataURLToBlob(m.edges.data):null,
-solid:m.solid?dataURLToBlob(m.solid.data):null,
+material:typeof m.materialData==="string"?m.materialData:(typeof m.material==="string"?m.material:""),
+edges:typeof m.edgesData==="string"?m.edgesData:(typeof m.edges==="string"?m.edges:""),
+solid:typeof m.solidData==="string"?m.solidData:(typeof m.solid==="string"?m.solid:""),
 collapsed:false
 }));
+
+if(adminModelDrafts.some(model=>!isWebPDataURL(model.material)||!isWebPDataURL(model.edges)||(model.solid&&!isWebPDataURL(model.solid)))){
+throw new Error("Imported model images must be WebP Data URLs.");
+}
 
 renderModelEditors();
 renderPackDerivedCategories();
@@ -2511,20 +2478,29 @@ alert("Import failed: "+e.message);
 
 function escapeJS(val){return String(val||"").replace(/'/g,"\\'");}
 function setMainFilter(f){
-sessionStorage.setItem("wody_main_filter",f);
-window.location.reload();
+currentMainFilter=f;
+localStorage.setItem("wody_main_filter",f);
+applyMainFilterState();
+renderAll();
 }
 function setSearch(v){currentSearch=v;renderAll();}
 function openImageViewer(src,title){
 document.getElementById("imageViewerImage").src=src;
 document.getElementById("imageViewerTitle").textContent=title;
+resetImageZoom();
 document.getElementById("imageViewerModal").classList.add("show");
 }
+let imageZoom=1;
+function zoomImage(amount){imageZoom=Math.max(.5,Math.min(3,imageZoom+amount));const image=document.getElementById("imageViewerImage");if(image)image.style.transform=`scale(${imageZoom})`;}
+function resetImageZoom(){imageZoom=1;const image=document.getElementById("imageViewerImage");if(image)image.style.transform="scale(1)";}
 function closeModal(id){document.getElementById(id).classList.remove("show");}
 function renderAll(){renderPacks();renderModels();}
 
 function toggleViewSettings(){
 document.getElementById("viewSettingsPanel")?.classList.toggle("show");
+}
+function toggleFilterMenu(){
+document.getElementById("filterPanel")?.classList.toggle("show");
 }
 function setViewMode(mode){
 localStorage.setItem("wody_view_mode",mode);
@@ -2532,6 +2508,11 @@ applyViewMode();
 document.getElementById("viewSettingsPanel")?.classList.remove("show");
 }
 function applyViewMode(){
+if(window.matchMedia?.("(max-width: 600px)").matches){
+document.getElementById("packsGrid")?.classList.add("view-compact");
+document.getElementById("modelsGrid")?.classList.add("view-compact");
+return;
+}
 const mode=localStorage.getItem("wody_view_mode")||"comfortable";
 document.getElementById("packsGrid")?.classList.remove("view-compact","view-large","view-list");
 document.getElementById("modelsGrid")?.classList.remove("view-compact","view-large","view-list");
@@ -2541,15 +2522,33 @@ document.getElementById("modelsGrid")?.classList.add(`view-${mode}`);
 }
 document.querySelectorAll("[data-view]").forEach(button=>button.classList.toggle("active",button.dataset.view===mode));
 }
+function setSortMode(value){localStorage.setItem("wody_sort_mode",value);renderAll();}
+function setDiscountFilter(value){localStorage.setItem("wody_discount_filter",value);renderAll();}
+function setPriceFilter(value){
+if(value==="custom"){document.getElementById("customPriceFilter").hidden=false;return;}
+document.getElementById("customPriceFilter").hidden=true;
+localStorage.setItem("wody_max_price",value);
+renderAll();
+}
+function setCustomPriceFilter(value){localStorage.setItem("wody_max_price",value||"Infinity");renderAll();}
+function applyStorefrontControls(){
+const state=getStorefrontFilterState();
+const sort=document.getElementById("sortFilter");const discount=document.getElementById("discountFilter");const price=document.getElementById("maxPriceFilter");
+if(sort)sort.value=state.sort;if(discount)discount.value=String(state.discount);
+if(price){const options=["Infinity","10","25","50","100"];price.value=options.includes(String(state.maxPrice))?String(state.maxPrice):"custom";}
+const custom=document.getElementById("customPriceFilter");
+if(custom){custom.hidden=price?.value!=="custom";custom.value=Number.isFinite(state.maxPrice)?state.maxPrice:"";}
+}
 
 function applyMainFilterState(){
-currentMainFilter=sessionStorage.getItem("wody_main_filter")||"all";
+currentMainFilter=localStorage.getItem("wody_main_filter")||"all";
 document.querySelectorAll(".nav-button").forEach(button=>button.classList.remove("active"));
 const activeButton={all:"allNav",packs:"packsNav",models:"modelsNav",favorites:"favoritesNav"}[currentMainFilter];
 if(activeButton)document.getElementById(activeButton)?.classList.add("active");
 }
 
 document.addEventListener("DOMContentLoaded",async()=>{
+cleanupLegacyLocalData();
 document.getElementById("copyrightYear").textContent=new Date().getFullYear();
 await loadData();
 applyMainFilterState();
@@ -2557,6 +2556,7 @@ applyTheme();
 updateAdminUI();
 renderAll();
 applyViewMode();
+applyStorefrontControls();
 window.dispatchEvent(new Event("wody-data-ready"));
 });
 </script>
@@ -2564,13 +2564,12 @@ window.dispatchEvent(new Event("wody-data-ready"));
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import {getAuth,GoogleAuthProvider,signInWithPopup,signOut,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-import {getFirestore,collection,doc,getDoc,setDoc,addDoc,updateDoc,deleteDoc,getDocs,query,where,serverTimestamp} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import {getFirestore,collection,doc,getDoc,setDoc,addDoc,updateDoc,deleteDoc,deleteField,getDocs,query,where,onSnapshot,serverTimestamp,writeBatch} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 const firebaseConfig={
 apiKey:"AIzaSyCV0Gph736xaKMZ3hEWqr2F9NW_Zs5x4to",
 authDomain:"wody-assets.firebaseapp.com",
 projectId:"wody-assets",
-storageBucket:"wody-assets.firebasestorage.app",
 messagingSenderId:"97351607034",
 appId:"1:97351607034:web:c71d1583e1c0d783b69f43",
 measurementId:"G-8BE26EN2JF"
@@ -2593,6 +2592,8 @@ let isCloudAdmin=false;
 window.firebaseAdminReady=false;
 window.firebaseAdmin=false;
 const cloudRatings={};
+window.cloudRatingsPublic=cloudRatings;
+window.likeCountsPublic={packs:{},models:{}};
 const cloudRatingState={};
 let activeCloudReport=null;
 
@@ -2600,6 +2601,50 @@ const fallbackAvatar="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 const targetKey=(type,id)=>`${type}_${id}`;
 const singularType=type=>type.endsWith("s")?type.slice(0,-1):type;
 window.addEventListener("wody-data-ready",()=>hydrateCloudCards().catch(error=>console.error("Public ratings loading failed:",error)));
+
+const cloudAssetIds={packs:new Set(),models:new Set()};
+async function loadCloudAssets(){
+try{
+const [packSnapshot,modelSnapshot]=await Promise.all([getDocs(collection(db,"packs")),getDocs(collection(db,"models"))]);
+cloudAssetIds.packs=new Set(packSnapshot.docs.map(item=>item.id));
+cloudAssetIds.models=new Set(modelSnapshot.docs.map(item=>item.id));
+migrateData();
+packs=packSnapshot.docs.map(item=>{const data=item.data();return {...data,id:item.id,image:data.imageData||data.imageUrl||data.image||null};});
+models=modelSnapshot.docs.map(item=>{const data=item.data();return {...data,id:item.id,material:data.materialData||data.materialUrl||data.material||null,edges:data.edgesData||data.edgesUrl||data.edges||null,solid:data.solidData||data.solidUrl||data.solid||null};});
+migrateData();
+renderAll();
+applyStorefrontControls();
+window.dispatchEvent(new Event("wody-data-ready"));
+}catch(error){console.error("Cloud assets loading failed:",error);}
+}
+window.saveCloudAssets=async()=>{
+if(!isCloudAdmin)return false;
+const packWrites=packs.map(pack=>{
+const {image,...packData}=pack;
+if(!isWebPDataURL(image))throw new Error(`Pack "${pack.name||pack.id}" must contain a WebP image.`);
+const data={...packData,imageData:image,imageUrl:deleteField(),image:deleteField(),updatedAt:serverTimestamp()};
+assertAssetDocumentSize("packs",pack.id,data);
+return {ref:doc(db,"packs",pack.id),data};
+});
+const modelWrites=models.map(model=>{
+const {material,edges,solid,...modelData}=model;
+if(!isWebPDataURL(material)||!isWebPDataURL(edges)||(solid&&!isWebPDataURL(solid)))throw new Error(`Model "${model.name||model.id}" must contain WebP Material and Edges images.`);
+const data={...modelData,materialData:material,edgesData:edges,solidData:solid||"",materialUrl:deleteField(),edgesUrl:deleteField(),solidUrl:deleteField(),material:deleteField(),edges:deleteField(),solid:deleteField(),updatedAt:serverTimestamp()};
+assertAssetDocumentSize("models",model.id,data);
+return {ref:doc(db,"models",model.id),data};
+});
+for(const write of packWrites)await setDoc(write.ref,write.data,{merge:true});
+for(const write of modelWrites)await setDoc(write.ref,write.data,{merge:true});
+for(const id of cloudAssetIds.packs){if(!packs.some(pack=>pack.id===id)){await deleteDoc(doc(db,"packs",id));}}
+for(const id of cloudAssetIds.models){if(!models.some(model=>model.id===id)){await deleteDoc(doc(db,"models",id));}}
+cloudAssetIds.packs=new Set(packs.map(pack=>pack.id));
+cloudAssetIds.models=new Set(models.map(model=>model.id));
+return true;
+};
+window.deleteCloudAsset=async(id,type)=>{
+if(!isCloudAdmin)return;
+await deleteDoc(doc(db,type,id));
+};
 
 function setAccountUI(user){
 const button=document.getElementById("accountButton");
@@ -2615,9 +2660,7 @@ if(email)email.textContent=user?.email||"";
 if(login)login.style.display=user?"none":"block";
 if(logout)logout.style.display=user?"block":"none";
 const adminButton=document.getElementById("adminButton");
-const plusButton=document.getElementById("plusButton");
 if(adminButton)adminButton.style.display=isCloudAdmin?"block":"none";
-if(plusButton)plusButton.style.display=isCloudAdmin?"block":"none";
 }
 
 window.openAccountPanel=()=>document.getElementById("accountModal")?.classList.add("show");
@@ -2625,7 +2668,6 @@ window.signInWithGoogleAccount=async()=>{
 try{
 if(!auth){throw new Error("Firebase is not initialized.");}
 await signInWithPopup(auth,googleProvider);
-window.location.reload();
 }catch(error){
 const message=error?.code==="auth/api-key-not-valid"?"The Firebase Web API key is invalid or incomplete. Copy the Web API key from Firebase Console > Project settings > Your apps and replace firebaseConfig.apiKey.":error?.code==="auth/unauthorized-domain"?"This page is opened with file://. Run it through Live Server or http://localhost and add localhost to Firebase Authorized Domains.":error.message;
 console.error("Google sign-in failed:",error);
@@ -2634,8 +2676,6 @@ alert(`Google sign-in failed: ${message}`);
 };
 window.signOutAccount=async()=>{
 await signOut(auth);
-sessionStorage.removeItem("wody_admin");
-window.location.reload();
 };
 window.openLogin=window.openAccountPanel;
 
@@ -2654,14 +2694,13 @@ await setDoc(userRef,{uid:user.uid,displayName:user.displayName||"",email:user.e
 isCloudAdmin=user.uid===ADMIN_UID;
 adminLoggedIn=isCloudAdmin;
 window.firebaseAdmin=isCloudAdmin;
-if(isCloudAdmin)sessionStorage.setItem("wody_admin","true");else sessionStorage.removeItem("wody_admin");
-}else sessionStorage.removeItem("wody_admin");
+}
 if(!user)adminLoggedIn=false;
 window.firebaseAdminReady=true;
 setAccountUI(user);
 if(typeof renderAll==="function")renderAll();
 hydrateCloudCards().catch(error=>console.error("Community card loading failed:",error));
-if(isCloudAdmin)loadCloudReports();
+loadCloudAssets();
 }catch(error){
 console.error("Firebase session setup failed:",error);
 window.firebaseAdminReady=true;
@@ -2680,26 +2719,49 @@ return false;
 
 window.firebaseToggleLike=async(event,type,id)=>{
 event?.stopPropagation();
-if(!requireUser())return;
+if(!requireUser())return false;
 const ref=doc(db,"engagement",targetKey(type,id),"likes",cloudUser.uid);
 const existing=await getDoc(ref);
 if(existing.exists())await deleteDoc(ref);else await setDoc(ref,{uid:cloudUser.uid,createdAt:serverTimestamp()});
+const liked=!existing.exists();
+if(!likedItems[type])likedItems[type]=[];
+if(liked&&!likedItems[type].includes(id))likedItems[type].push(id);
+if(!liked)likedItems[type]=likedItems[type].filter(item=>item!==id);
+const likes=await getDocs(collection(db,"engagement",targetKey(type,id),"likes"));
+likeCounts[type][id]=likes.size;
+document.querySelectorAll(`[data-like="${type}:${id}"]`).forEach(button=>{
+button.innerHTML=button.classList.contains("action-icon")?`♥ ${likes.size} Likes`:`♥ ${likes.size}`;
+button.classList.toggle("liked",liked);
+});
 await refreshCardEngagement(type,id);
-await hydrateCloudDetail(type,id);
+if(document.getElementById("productModal")?.classList.contains("show"))renderCurrentDetail();
+return true;
 };
 window.firebaseToggleFavorite=async(event,type,id)=>{
 event?.stopPropagation();
-if(!requireUser())return;
+if(!requireUser())return false;
 const ref=doc(db,"users",cloudUser.uid,"favorites",targetKey(type,id));
 const existing=await getDoc(ref);
 if(existing.exists())await deleteDoc(ref);else await setDoc(ref,{targetType:singularType(type),targetId:id,createdAt:serverTimestamp()});
-document.querySelectorAll(`[data-favorite="${type}:${id}"]`).forEach(button=>button.classList.toggle("active",!existing.exists()));
+if(!favorites[type])favorites[type]=[];
+if(existing.exists())favorites[type]=favorites[type].filter(item=>item!==id);else if(!favorites[type].includes(id))favorites[type].push(id);
+const favorite=!existing.exists();
+document.querySelectorAll(`[data-favorite="${type}:${id}"]`).forEach(button=>{
+button.classList.toggle("active",favorite);
+if(button.classList.contains("action-icon"))button.textContent=favorite?"★ Favorited":"★ Favorite";
+});
 await refreshCardEngagement(type,id);
+if(document.getElementById("productModal")?.classList.contains("show"))renderCurrentDetail();
+return true;
 };
 
 function ratingStars(value){
 const full=Math.max(0,Math.min(5,Math.round(Number(value)||0)));
 return "★".repeat(full)+"☆".repeat(5-full);
+}
+function formatRating(value){
+const number=Number(value)||0;
+return Number.isInteger(number)?String(number):number.toFixed(1);
 }
 async function getRatingSummary(type,id){
 const snap=await getDocs(query(collection(db,"ratings"),where("targetKey","==",targetKey(type,id))));
@@ -2712,8 +2774,9 @@ try{
 const summary=await getRatingSummary(type,id);
 cloudRatings[targetKey(type,id)]=summary;
 document.querySelectorAll(`[data-rating="${type}:${id}"]`).forEach(element=>{
-element.innerHTML=summary.count?`<span class="rating-stars">${ratingStars(summary.average)}</span> ${summary.average.toFixed(1)} / 5 (${summary.count})`:`<span class="rating-stars">☆☆☆☆☆</span> No ratings yet`;
+element.innerHTML=summary.count?`<span class="rating-stars">${ratingStars(summary.average)}</span> ${formatRating(summary.average)} / 5 (${summary.count})`:`<span class="rating-stars">☆☆☆☆☆</span> No ratings yet`;
 });
+window.cloudRatingsPublic[targetKey(type,id)]=summary;
 }catch(error){
 console.error("Rating loading failed:",error);
 document.querySelectorAll(`[data-rating="${type}:${id}"]`).forEach(element=>{element.innerHTML=`<span class="rating-stars">☆☆☆☆☆</span> Ratings unavailable`;});
@@ -2723,8 +2786,16 @@ async function refreshCardEngagement(type,id){
 const key=targetKey(type,id);
 const likes=await getDocs(collection(db,"engagement",key,"likes"));
 const liked=!!cloudUser&&likes.docs.some(item=>item.id===cloudUser.uid);
+if(!likedItems[type])likedItems[type]=[];
+if(liked&&!likedItems[type].includes(id))likedItems[type].push(id);
+if(!liked)likedItems[type]=likedItems[type].filter(item=>item!==id);
+likeCounts[type][id]=likes.size;
 document.querySelectorAll(`[data-like="${type}:${id}"]`).forEach(button=>{button.innerHTML=`♥ ${likes.size}`;button.classList.toggle("liked",liked);});
+window.likeCountsPublic[type][id]=likes.size;
 const favorite=cloudUser?await getDoc(doc(db,"users",cloudUser.uid,"favorites",key)):null;
+if(!favorites[type])favorites[type]=[];
+if(favorite?.exists()&&!favorites[type].includes(id))favorites[type].push(id);
+if(!favorite?.exists())favorites[type]=favorites[type].filter(item=>item!==id);
 document.querySelectorAll(`[data-favorite="${type}:${id}"]`).forEach(button=>button.classList.toggle("active",!!favorite?.exists()));
 }
 async function hydrateCloudCards(){
@@ -2751,17 +2822,19 @@ try{
 const key=targetKey(type,id);const summary=cloudRatings[key]||await getRatingSummary(type,id);cloudRatings[key]=summary;
 if(summary.mine)cloudRatingState[key]=summary.mine;
 const commentsSnap=await getDocs(query(collection(db,"comments"),where("targetKey","==",key)));
-const comments=[...commentsSnap.docs].map(item=>({id:item.id,...item.data()})).sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
-mount.innerHTML=`<h3>Ratings & Comments</h3><div class="rating-summary"><span class="rating-stars">${ratingStars(summary.average)}</span> ${summary.count?summary.average.toFixed(1):"0.0"} / 5 (${summary.count} ratings)</div>
+const comments=await Promise.all(commentsSnap.docs.map(async item=>{
+const likes=await getDocs(collection(db,"comments",item.id,"likes"));
+return {id:item.id,likeCount:likes.size,liked:!!cloudUser&&likes.docs.some(like=>like.id===cloudUser.uid),...item.data()};
+}));
+comments.sort((a,b)=>commentPriority(b)-commentPriority(a));
+mount.innerHTML=`<h3>Ratings & Comments</h3><div class="rating-summary"><span class="rating-stars">${ratingStars(summary.average)}</span> ${formatRating(summary.average)} / 5 (${summary.count} ratings)</div>
 <div class="rating-picker" aria-label="Choose a rating">${[1,2,3,4,5].map(value=>`<button type="button" data-rating="${value}" class="${Number(cloudRatingState[key])>=value?"active":""}" onclick="chooseCloudRating(${value})" aria-label="${value} stars">★</button>`).join("")}</div>
-<button class="secondary-button" onclick="saveCloudRating('${type}','${id}')">Save Rating</button>
 <div class="comment-form"><textarea id="cloudCommentText-${type}-${id}" placeholder="Write a comment..." maxlength="1000"></textarea><button class="primary-button" onclick="submitCloudComment('${type}','${id}')">Post</button></div>
-<div class="comment-list">${comments.length?comments.map(comment=>`<div class="cloud-comment"><img src="${escapeHTML(comment.userPhoto||fallbackAvatar)}" alt=""><div class="cloud-comment-body"><div class="cloud-comment-head"><strong>${escapeHTML(comment.userName||"User")}</strong><span class="comment-date">${comment.createdAt?.toDate?comment.createdAt.toDate().toLocaleString():""}</span></div><div class="cloud-comment-text">${escapeHTML(comment.text)}</div></div></div>`).join(""):"<div class=\"info\">No comments yet.</div>"}</div>`;
+<div class="comment-list">${comments.length?comments.map(comment=>`<div class="cloud-comment"><img src="${escapeHTML(comment.userPhoto||fallbackAvatar)}" alt=""><div class="cloud-comment-body"><div class="cloud-comment-head"><strong>${escapeHTML(comment.userName||"User")}</strong><span class="comment-date">${comment.createdAt?.toDate?comment.createdAt.toDate().toLocaleString():""}</span></div><div class="cloud-comment-rating">${ratingStars(comment.rating||0)}</div><div class="cloud-comment-text">${escapeHTML(comment.text)}</div><button class="secondary-button comment-like-button ${comment.liked?"active":""}" onclick="toggleCommentLike('${comment.id}','${type}','${id}')">♥ ${comment.likeCount}</button></div></div>`).join(""):"<div class=\"info\">No comments yet.</div>"}</div>`;
 }catch(error){
 console.error("Community loading failed:",error);
 mount.innerHTML=`<h3>Ratings & Comments</h3><div class="info">Community data is temporarily unavailable. Check Firebase Firestore rules and try again.</div>
 <div class="rating-picker" aria-label="Choose a rating">${[1,2,3,4,5].map(value=>`<button type="button" data-rating="${value}" class="${Number(cloudRatingState[key])>=value?"active":""}" onclick="chooseCloudRating(${value})" aria-label="${value} stars">★</button>`).join("")}</div>
-<button class="secondary-button" onclick="saveCloudRating('${type}','${id}')">Save Rating</button>
 <div class="comment-form"><textarea id="cloudCommentText-${type}-${id}" placeholder="Write a comment..." maxlength="1000"></textarea><button class="primary-button" onclick="submitCloudComment('${type}','${id}')">Post</button></div>`;
 }
 }
@@ -2772,9 +2845,25 @@ if(!text)return;
 const rating=Number(cloudRatingState[key]);
 if(!(rating>=1&&rating<=5)){alert("Choose a star rating from 1 to 5 before posting a comment.");return;}
 try{
-await addDoc(collection(db,"comments"),{targetId:id,targetType:singularType(type),targetKey:key,text,rating,uid:cloudUser.uid,userName:cloudUser.displayName||"User",userEmail:cloudUser.email||"",userPhoto:cloudUser.photoURL||"",createdAt:serverTimestamp()});
+const batch=writeBatch(db);
+batch.set(doc(db,"comments",`${key}_${cloudUser.uid}`),{targetId:id,targetType:singularType(type),targetKey:key,text,rating,uid:cloudUser.uid,userName:cloudUser.displayName||"User",userEmail:cloudUser.email||"",userPhoto:cloudUser.photoURL||"",createdAt:serverTimestamp(),updatedAt:serverTimestamp()},{merge:true});
+batch.set(doc(db,"ratings",`${key}_${cloudUser.uid}`),{uid:cloudUser.uid,targetId:id,targetType:singularType(type),targetKey:key,rating,updatedAt:serverTimestamp()},{merge:true});
+await batch.commit();
 await mountCloudCommunity(type,id);
 }catch(error){console.error("Comment submission failed:",error);alert(`Comment could not be posted: ${error.message}`);}
+};
+function commentPriority(comment){
+const timestamp=comment.createdAt?.toDate?comment.createdAt.toDate().getTime():((comment.createdAt?.seconds||0)*1000);
+const ageDays=Math.max(0,(Date.now()-timestamp)/86400000);
+const recency=Math.max(0,7-ageDays)*10+Math.max(0,30-ageDays);
+return recency+Math.log1p(comment.likeCount||0)*18;
+}
+window.toggleCommentLike=async(commentId,type,id)=>{
+if(!requireUser())return;
+const likeRef=doc(db,"comments",commentId,"likes",cloudUser.uid);
+const existing=await getDoc(likeRef);
+if(existing.exists())await deleteDoc(likeRef);else await setDoc(likeRef,{uid:cloudUser.uid,createdAt:serverTimestamp()});
+await mountCloudCommunity(type,id);
 };
 window.hydrateCloudDetail=async(type,id)=>{await refreshRating(type,id);await mountCloudCommunity(type,id);};
 
@@ -2802,11 +2891,22 @@ const reports=[...snap.docs].map(item=>({id:item.id,...item.data()})).sort((a,b)
 document.getElementById("newReportsBadge").textContent=reports.filter(report=>!report.read).length;
 list.innerHTML=reports.length?reports.map(report=>`<article class="report-item"><strong>${escapeHTML(report.targetName||"Unknown")}</strong><div>${escapeHTML(report.userName||"")} · ${escapeHTML(report.userEmail||"")}</div><small>${escapeHTML(report.targetType||"")} · ${report.read?"Read":"New"}</small><p>${escapeHTML(report.message||"")}</p><button class="secondary-button" onclick="markCloudReportRead('${report.id}')">Mark Read</button> <button class="danger-button" onclick="deleteCloudReport('${report.id}')">Delete</button></article>`).join(""):"<div class=\"info\">No reports.</div>";
 };
+let reportsUnsubscribe=null;
+window.subscribeCloudReports=()=>{
+if(!isCloudAdmin)return;
+reportsUnsubscribe?.();
+reportsUnsubscribe=onSnapshot(collection(db,"reports"),snapshot=>{
+const reports=snapshot.docs.map(item=>({id:item.id,...item.data()})).sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
+const list=document.getElementById("cloudReports");if(!list)return;
+document.getElementById("newReportsBadge").textContent=reports.filter(report=>!report.read).length;
+list.innerHTML=reports.length?reports.map(report=>`<article class="report-item"><strong>${escapeHTML(report.targetName||"Unknown")}</strong><div>${escapeHTML(report.userName||"")} · ${escapeHTML(report.userEmail||"")}</div><small>${escapeHTML(report.targetType||"")} · ${report.read?"Read":"New"}</small><p>${escapeHTML(report.message||"")}</p><button class="secondary-button" onclick="markCloudReportRead('${report.id}')">Mark Read</button> <button class="danger-button" onclick="deleteCloudReport('${report.id}')">Delete</button></article>`).join(""):"<div class=\"info\">No reports.</div>";
+},error=>console.error("Reports listener failed:",error));
+};
 window.markCloudReportRead=async id=>{if(!isCloudAdmin)return;await updateDoc(doc(db,"reports",id),{read:true,status:"read"});await loadCloudReports();};
 window.deleteCloudReport=async id=>{if(!isCloudAdmin)return;if(confirm("Delete this report?")){await deleteDoc(doc(db,"reports",id));await loadCloudReports();}};
 
 const localOpenAdmin=window.openAdmin;
-window.openAdmin=()=>{if(!isCloudAdmin){alert("Access Denied");return;}localOpenAdmin();loadCloudReports();};
+window.openAdmin=()=>{if(!isCloudAdmin){alert("Access Denied");return;}localOpenAdmin();};
 </script>
 
 </body>
