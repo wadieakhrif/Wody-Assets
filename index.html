@@ -1057,7 +1057,7 @@ to{opacity:1;transform:scale(1) translateY(0);}
 <input id="searchInput" type="search" placeholder="Search assets..." oninput="setSearch(this.value)">
 </div>
 
-<button id="adminButton" class="nav-button" onclick="openLogin()" style="display:none">Admin</button>
+<button id="adminButton" class="nav-button" onclick="openAdmin()" style="display:none">Admin</button>
 <button id="plusButton" class="nav-button" onclick="openAdmin()" style="display:none">＋</button>
 <button id="accountButton" class="account-button" onclick="openAccountPanel()" title="Account">◯</button>
 
@@ -1690,7 +1690,6 @@ if(plusButton)plusButton.style.display=verifiedAdmin?"block":"none";
 
 function openAdmin(){
 if(window.firebaseAdminReady&&!window.firebaseAdmin){alert("Access Denied");return;}
-if(!adminLoggedIn){openLogin();return;}
 startNewPack();
 renderAdminCatalog();
 document.getElementById("adminModal").classList.add("show");
@@ -1725,7 +1724,6 @@ setSaveStatus("","");
 function editPackFromCard(event,packId){
 event.stopPropagation();
 if(window.firebaseAdminReady&&!window.firebaseAdmin){alert("Access Denied");return;}
-if(!adminLoggedIn){openLogin();return;}
 
 const pack=packs.find(p=>p.id===packId);
 if(!pack)return;
@@ -2589,7 +2587,7 @@ console.error("Firebase initialization failed:",error);
 alert("Firebase could not start. Verify the Firebase API key and project configuration in index.html.");
 }
 const googleProvider=new GoogleAuthProvider();
-const ADMIN_EMAIL="wadieakhrif2@gmail.com";
+const ADMIN_UID="04R2plELcbMPBPOYvV0dpXndp0x1";
 let cloudUser=null;
 let isCloudAdmin=false;
 window.firebaseAdminReady=false;
@@ -2599,7 +2597,6 @@ const cloudRatingState={};
 let activeCloudReport=null;
 
 const fallbackAvatar="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='40' fill='%23eee8f7'/%3E%3Ccircle cx='40' cy='30' r='13' fill='%2377707f'/%3E%3Cpath d='M16 69c3-17 13-25 24-25s21 8 24 25' fill='%2377707f'/%3E%3C/svg%3E";
-const adminRole=uid=>getDoc(doc(db,"users",uid));
 const targetKey=(type,id)=>`${type}_${id}`;
 const singularType=type=>type.endsWith("s")?type.slice(0,-1):type;
 window.addEventListener("wody-data-ready",()=>hydrateCloudCards().catch(error=>console.error("Public ratings loading failed:",error)));
@@ -2653,12 +2650,13 @@ if(user){
 setAccountUI(user);
 const userRef=doc(db,"users",user.uid);
 const existing=await getDoc(userRef);
-await setDoc(userRef,{uid:user.uid,displayName:user.displayName||"",email:user.email||"",photoURL:user.photoURL||"",updatedAt:serverTimestamp(),...(existing.exists()?{}:{role:"user"})},{merge:true});
-const role=await adminRole(user.uid);
-isCloudAdmin=role.exists()&&role.data().role==="admin";
+await setDoc(userRef,{uid:user.uid,displayName:user.displayName||"",email:user.email||"",photoURL:user.photoURL||"",updatedAt:serverTimestamp(),...(existing.exists()?{}:{role:user.uid===ADMIN_UID?"admin":"user"})},{merge:true});
+isCloudAdmin=user.uid===ADMIN_UID;
+adminLoggedIn=isCloudAdmin;
 window.firebaseAdmin=isCloudAdmin;
 if(isCloudAdmin)sessionStorage.setItem("wody_admin","true");else sessionStorage.removeItem("wody_admin");
 }else sessionStorage.removeItem("wody_admin");
+if(!user)adminLoggedIn=false;
 window.firebaseAdminReady=true;
 setAccountUI(user);
 if(typeof renderAll==="function")renderAll();
