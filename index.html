@@ -1075,7 +1075,7 @@ to{opacity:1;transform:scale(1) translateY(0);}
 <div class="geo-bg" aria-hidden="true"><span class="geo-triangle"></span><span class="geo-circle"></span><span class="geo-cylinder"></span><span class="geo-trapezoid"></span><span class="geo-half"></span></div>
 
 <nav class="navbar">
-<div class="logo"><img src="https://cdn.phototourl.com/free/2026-09-08-2dc381f1-ee2a-4033-8a87-7d07af112410.webp" alt="Woody Assets"><span class="logo-name">Woody Assets</span></div>
+<div class="logo"><img src="https://cdn.phototourl.com/free/2026-09-08-2dc381f1-ee2a-4033-8a87-7d07af112410.webp" alt="Wody Assets"><span class="logo-name">Wody Assets</span></div>
 
 <button id="allNav" class="nav-button active" onclick="setMainFilter('all')">All</button>
 <button id="packsNav" class="nav-button" onclick="setMainFilter('packs')">Packs</button>
@@ -2099,7 +2099,7 @@ ${adminLoggedIn?`<button class="card-admin-edit" onclick="editPackFromCard(event
 <span class="product-type">Pack</span>
 <div class="card-title">${escapeHTML(pack.name)}</div>
 <div class="rating-summary" data-rating="packs:${pack.id}"></div>
-<div class="made-by">Made by Woody</div>
+<div class="made-by">Made by Wody</div>
 ${renderPriceRow(pack)}
 <div class="card-meta">
 <button class="card-like ${likedItems.packs.includes(pack.id)?"liked":""}" data-like="packs:${pack.id}" onclick="toggleLike(event,'packs','${pack.id}')">
@@ -2138,7 +2138,7 @@ ${model.material?`<img src="${getImageSrc(model.material)}" alt="${escapeHTML(mo
 <span class="product-type">Model</span>
 <div class="card-title">${escapeHTML(model.name)}</div>
 <div class="rating-summary" data-rating="models:${model.id}"></div>
-<div class="made-by">Made by Woody</div>
+<div class="made-by">Made by Wody</div>
 ${renderPriceRow(model)}
 <div class="card-meta">
 <button class="card-like ${likedItems.models.includes(model.id)?"liked":""}" data-like="models:${model.id}" onclick="toggleLike(event,'models','${model.id}')">
@@ -2292,7 +2292,7 @@ ${renderGallery("packs",id)}
 <span class="product-type">Pack</span>
 <h1 class="detail-title">${escapeHTML(pack.name)}</h1>
 <div class="rating-summary" data-rating="packs:${id}"></div>
-<div class="made-by">Made by Woody</div>
+<div class="made-by">Made by Wody</div>
 <p class="detail-description">${escapeHTML(pack.description)}</p>
 ${renderPriceRow(pack)}
 ${renderDetailActions("packs",id)}
@@ -2331,7 +2331,7 @@ ${renderGallery("models",id)}
 <span class="product-type">Model</span>
 <h1 class="detail-title">${escapeHTML(model.name)}</h1>
 <div class="rating-summary" data-rating="models:${id}"></div>
-<div class="made-by">Made by Woody</div>
+<div class="made-by">Made by Wody</div>
 <p class="detail-description">${escapeHTML(model.description)}</p>
 <div class="stats">
 <div class="stat"><b>Vertices</b>${escapeHTML(model.vertices||0)}</div>
